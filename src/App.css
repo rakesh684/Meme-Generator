@@ -27,6 +27,8 @@ main{
 .form{
     display: grid;
     grid-template: 40px 40px / 1fr 1fr;
+    /* padding: 1rem; */
+    /* padding-right: 10px; */
     gap: 17px;
 }
 .form-input{
@@ -43,4 +45,11 @@ main{
   color: white;
   border: none;
   cursor: pointer;
+}
+.form-button span{
+  color: rgb(40, 226, 40);
+  border: 2px solid yellow;
+  box-shadow:  2px 3px #D5D4D8;
+ 
+
 }

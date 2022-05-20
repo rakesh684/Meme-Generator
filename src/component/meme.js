@@ -3,10 +3,10 @@ export default function Meme(){
     return(
         
         <main>
-            <form>
+            <form className="form">
                 <input type="text" placeholder="Top-text" className="form-input" />
                 <input type="text" placeholder="Button-text" className="form-input" />
-                <button className="form-button">Get a new images</button>
+                <button className="form-button">Get a new meme images <span>🖼</span></button>
             </form>
         </main>
     )
