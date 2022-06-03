@@ -1,24 +1,33 @@
 import React,{useState} from "react";
 import memesData from "../memesData.js";
 export default function Meme(){
-    const [memeImage,setMemeImage]=useState("")
+
+    const [meme , setMeme]=React.useState({
+        topText:"",
+        bottomText:"",
+        randomImage:"http://i.imgflip.com/1bij.jpg"
+    })
+    // const [memeImage,setMemeImage]=useState("")
+    const [allMemeImages,setAllMemeImage]=React.useState(memesData)
 
     function getMemeImage(e){
         e.preventDefault()
-        const memesArray=memesData.data.memes
-        const rendomNumber=Math.floor(Math.random() * memesArray.length)
-        const url=memesArray[rendomNumber].url
-        setMemeImage(url)
-        console.log(memeImage)
+        const memesArray=allMemeImages.data.memes
+        const randomNumber=Math.floor(Math.random() * memesArray.length)
+        const url=memesArray[randomNumber].url
+        setMeme(prevMeme =>({
+            ...prevMeme,
+            randomImage:url
+        }))
+      
        
     }
     
-
     return(
 
         
         <main>
-            <form className="form">
+            <div className="form">
                 <input type="text" placeholder="Top-text" className="form-input" />
                 <input type="text" placeholder="Button-text" className="form-input" />
                 <button className="form-button"
@@ -28,9 +37,9 @@ export default function Meme(){
                 <span>🖼</span>
                 </button>
 
-            </form>
+            </div>
             
-            <img className="output-image" src={memeImage} alt=""/>
+            <img className="output-image" src={meme.randomImage} alt=""/>
         </main>
     )
 }
