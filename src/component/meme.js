@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import memesData from "../memesData.js";
 export default function Meme(){
 
@@ -7,16 +7,25 @@ export default function Meme(){
         bottomText:"",
         randomImage:"http://i.imgflip.com/1bij.jpg"
     })
-    // const [memeImage,setMemeImage]=useState("")
+
+    function handleInput(event){
+        event.preventDefault()
+        const {name,value}=event.target
+        setMeme(prevMeme=>({
+            ...prevMeme,
+            [name]:value
+        }))
+    }
+   
     const [allMemeImages,setAllMemeImage]=React.useState(memesData)
 
-    function getMemeImage(e){
-        e.preventDefault()
+    function getMemeImage(event){
+        event.preventDefault()
         const memesArray=allMemeImages.data.memes
         const randomNumber=Math.floor(Math.random() * memesArray.length)
         const url=memesArray[randomNumber].url
         setMeme(prevMeme =>({
-            ...prevMeme,
+           ...prevMeme,
             randomImage:url
         }))
       
@@ -28,8 +37,23 @@ export default function Meme(){
         
         <main>
             <div className="form">
-                <input type="text" placeholder="Top-text" className="form-input" />
-                <input type="text" placeholder="Button-text" className="form-input" />
+                <input 
+                   type="text" 
+                   placeholder="Top-text" 
+                   className="form-input" 
+                   name="topText"
+                   onChange={handleInput}
+                   value={meme.topText}
+
+                   />
+                <input 
+                     type="text"
+                     placeholder="Button-text"
+                     className="form-input" 
+                     name="bottomText"
+                     onChange={handleInput}
+                     value={meme.bottomText}
+                     />
                 <button className="form-button"
                  onClick={getMemeImage}
                 >
@@ -39,7 +63,11 @@ export default function Meme(){
 
             </div>
             
-            <img className="output-image" src={meme.randomImage} alt=""/>
+            <div className="meme">
+                <img src={meme.randomImage} className="meme--image" alt="" />
+                <h2 className="meme--text top">{meme.topText}</h2>
+                <h2 className="meme--text bottom">{meme.bottomText}</h2>
+            </div>
         </main>
     )
 }
